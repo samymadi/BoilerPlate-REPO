@@ -1,5 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
+import classes from 'classes';
+
+
+
+const data = classes('data','data2');
 
 function App() {
   return (

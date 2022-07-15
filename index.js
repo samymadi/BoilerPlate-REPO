@@ -3,7 +3,9 @@ const app = require('./app');
 
 
 
-
+app.get('/data',(req,res)=>{
+        res.send(req.t('email_error'));
+})
 
 
 
