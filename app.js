@@ -2,6 +2,7 @@ const express = require('express');
 const helmet = require('helmet'); //for security (frame cross etc...)
 const morgan = require('./config/morgan'); //for logs
 const i18nextMiddleware = require('./config/i18n'); 
+const {errorHandler,errorConverter}= require('./middlewares/error');
 
 
 const app = express();
@@ -21,9 +22,11 @@ app.use(helmet());
 app.use(express.json());
 
 
-
 // parse urlencoded request body
 app.use(express.urlencoded({ extended: true }));
+
+//to convert and handle Errors
+app.use(errorConverter,errorHandler);
 
 
 
