@@ -1,17 +1,13 @@
-const express = require('express');
-const path = require('path');
-
-const app = express();
-app.use(express.static(path.join(__dirname,'build')));
+const app = require('./app');
 
 
 
 
-app.get('/*',(req,res)=>{
-   
-    res.sendFile(path.join(__dirname,'build','index.html'));
-})
+
+
+
 
 app.listen(process.env.PORT | 3001 ,()=>{
     console.log("server started on port",process.env.PORT);
+    console.log("mode:",process.env.NODE_ENV);
 })
