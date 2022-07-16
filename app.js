@@ -3,8 +3,10 @@ const dotEnv = require('./config/config');
 
 const helmet = require('helmet'); //for security (frame cross etc...)
 const morgan = require('./config/morgan'); //for logs
+const xss = require('xss-clean');
 const i18nextMiddleware = require('./config/i18n'); 
 const {errorHandler,errorConverter}= require('./middlewares/error');
+const compression = require('./middlewares/compressionMiddleware');
 
 const app = express();
 
@@ -25,6 +27,13 @@ app.use(express.json());
 
 // parse urlencoded request body
 app.use(express.urlencoded({ extended: true }));
+
+
+
+//sanitize data 
+app.use(xss());
+
+app.use(compression);
 
 //to convert and handle Errors
 app.use(errorConverter,errorHandler);
