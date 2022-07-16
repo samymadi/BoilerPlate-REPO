@@ -2,7 +2,7 @@ const dotenv = require("dotenv");
 const path = require('path');
 
 
-const ENV_PATH = path.resolve(__dirname,`../.env.local.${process.env.NODE_ENV}`);
+const ENV_PATH = path.resolve(__dirname,`../.env.server.${process.env.NODE_ENV}`);
 
 //stock ENV Variable to process.env 
 dotenv.config({path:ENV_PATH});
