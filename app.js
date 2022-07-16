@@ -1,9 +1,10 @@
 const express = require('express');
+const dotEnv = require('./config/config');
+
 const helmet = require('helmet'); //for security (frame cross etc...)
 const morgan = require('./config/morgan'); //for logs
 const i18nextMiddleware = require('./config/i18n'); 
 const {errorHandler,errorConverter}= require('./middlewares/error');
-
 
 const app = express();
 

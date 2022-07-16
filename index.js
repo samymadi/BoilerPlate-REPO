@@ -26,4 +26,6 @@ app.get('/data',catchAsync(async(req,res)=>{
 app.listen(process.env.PORT | 3001 ,()=>{
     console.log("server started on port",process.env.PORT);
     console.log("mode:",process.env.NODE_ENV);
+    console.log("state",process.env.STATE) 
+
 })
