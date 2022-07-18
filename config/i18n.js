@@ -13,6 +13,6 @@ i18next.use(backend).use(middleware.LanguageDetector)
         backend:{
             loadPath:PATH_TRANSLATIONS_FILE,
         }
-    })
+})
 
 module.exports = middleware.handle(i18next);

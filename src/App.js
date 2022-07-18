@@ -4,14 +4,21 @@ import React from "react";
 //material ui
 import theme from "./style/theme";
 import {ThemeProvider} from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+import CssBaseline from '@mui/material/CssBaseline'; 
 
 
 //Routing
 import Routing from "./navigation/Routing.jsx";
+ 
 
-import '../config/i18n';
-import { useTranslation } from "react-i18next";
+import { useDispatch,useSelector } from "react-redux";
+
+
+//redux features
+import {toMadi} from "./features/state/state-slice";
+
+//i18next
+import { useTranslation } from "react-i18next"; 
 
 
 
@@ -22,13 +29,14 @@ import { useTranslation } from "react-i18next";
 function App() {
 
 
-  const {t,i18n} =  useTranslation();
+  const [t,i18n] =  useTranslation();
+  const value = useSelector(state=>state.stateValue.state);
+  const dispatch = useDispatch();
   return (
     <ThemeProvider theme={theme}>
         <CssBaseline />
         <Routing/>
-
-        <p>{t('email_error')}</p>
+        <p onClick={()=>{ console.log('here');  dispatch(toMadi(Math.random().toString()))}} >{value}</p>
     </ThemeProvider>
   );
 }
