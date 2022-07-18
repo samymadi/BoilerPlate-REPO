@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 
 //material ui
@@ -21,12 +21,29 @@ import {toMadi} from "./features/state/state-slice";
 import { useTranslation } from "react-i18next"; 
 
 
-
+//
+import {api} from './services/configAxios';
 
 
 
 
 function App() {
+
+
+
+
+
+  useEffect(()=>{
+    request();
+  },[])
+
+
+
+  async function request(){
+    const {result,error} = await api.get('/data');
+  
+    console.log(result,error);
+  }
 
 
   const [t,i18n] =  useTranslation();
@@ -36,7 +53,7 @@ function App() {
     <ThemeProvider theme={theme}>
         <CssBaseline />
         <Routing/>
-        <p onClick={()=>{ console.log('here');  dispatch(toMadi(Math.random().toString()))}} >{value}</p>
+        <p onClick={()=>{  dispatch(toMadi(Math.random().toString()))}} >{value}</p>
     </ThemeProvider>
   );
 }
