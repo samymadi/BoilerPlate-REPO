@@ -53,7 +53,7 @@ function App() {
     <ThemeProvider theme={theme}>
         <CssBaseline />
         <Routing/>
-        <p onClick={()=>{  dispatch(toMadi(Math.random().toString()))}} >{value}</p>
+        {/* <p onClick={()=>{  dispatch(toMadi(Math.random().toString()))}} >{value}</p> */}
     </ThemeProvider>
   );
 }
