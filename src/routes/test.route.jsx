@@ -4,6 +4,7 @@ import React,{memo,useState} from 'react'
 
 //components
 import Input from '../components/Input/Input'
+import CheckBox from '../components/checkbox/checkbox'
 
 
 function testRoute() {
@@ -34,6 +35,7 @@ function testRoute() {
                 placeholder='Email'
                 title='Email'
                 setValue={setEmail}/>
+                <CheckBox checkboxProps={{}}/>
             <button onClick={handleClick}>error</button>
     </div>
   )
