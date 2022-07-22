@@ -14,6 +14,7 @@ const xss = require('xss-clean');
 const i18nextMiddleware = require('./config/i18n'); 
 const {errorHandler,errorConverter}= require('./middlewares/error');
 const compression = require('./middlewares/compressionMiddleware');
+const servingClientMiddlware = require('./middlewares/servingClientMiddlware');
 
 const app = express();
 
@@ -36,7 +37,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-
 //sanitize data 
 app.use(xss());
 
@@ -47,14 +47,8 @@ app.use(compression);
 app.use(cors());
 app.options('*', cors());
 
+app.use(servingClientMiddlware);
 
-app.get('/data',catchAsync(async(req,res)=>{
-
-    throw new ApiError(httpStatus.BAD_REQUEST,"error try this");
-    res.json("oke");
-
-    
-}))
 
 
 
