@@ -2,6 +2,7 @@ const httpStatus = require('http-status');
 const app = require('./app');
 const ApiError = require('./utils/ApiError');
 const catchAsync = require('./utils/catchAsync');
+// mostly all will be removed and refactored 
 const passport = require('passport')
 const { authRoute } = require("./routes/index.routes")
 const { loginLocalStrategy, jwtLoginStrategy } = require("./config/passport.js")
@@ -15,12 +16,8 @@ app.use("/auth", authRoute);
 app.get("/", (req, res) => {
     res.send("hello world!")
 })
-app.get('/data', catchAsync(async (req, res) => {
+// app.get('/data', catchAsync(async (req, res) => {
 
-    throw new ApiError(400, 'something wrong');
-    res.send("oke");
-    // throw new ApiError(httpStatus.BAD_REQUEST,"error");
-}))
 
 
 
@@ -30,8 +27,11 @@ app.get('/data', catchAsync(async (req, res) => {
 // app.get()
 
 
-app.listen(process.env.PORT | 3001, () => {
-    console.log("server started on port", process.env.PORT);
+const PORT = process.env.PORT | 3001
+
+
+app.listen(PORT, () => {
+    console.log("server started on port", PORT);
     console.log("mode:", process.env.NODE_ENV);
     console.log("state", process.env.STATE)
 
