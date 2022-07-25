@@ -2,10 +2,18 @@ const httpStatus = require('http-status');
 const app = require('./app');
 const ApiError = require('./utils/ApiError');
 const catchAsync = require('./utils/catchAsync');
+const passport = require('passport')
+const { authRoute } = require("./routes/index.routes")
+const { loginLocalStrategy } = require("./config/passport.js")
+console.log(authRoute)
+passport.use("local-login", loginLocalStrategy);
+
+app.use("/auth", authRoute);
 
 
-
-
+app.get("/", (req, res) => {
+    res.send("hello world!")
+})
 app.get('/data', catchAsync(async (req, res) => {
 
     throw new ApiError(400, 'something wrong');
