@@ -1,10 +1,16 @@
 const login = (req, res) => {
-
-    res.status(212).send(res.locals.data);
+    res.status(200).send(req.user);
 }
+const register = (req, res) => {
 
+}
+const logout = (req, res) => {
 
+};
+const test = (req, res) => {
+    res.status(200).send(req.user)
+};
 module.exports = {
-    login,
+    login, register, logout, test
 
 }

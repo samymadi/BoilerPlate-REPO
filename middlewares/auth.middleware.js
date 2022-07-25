@@ -12,10 +12,10 @@ const verifyCallBack = (req, res, resolve, reject) => {
         }
         req.login(user, { session: false }, (err) => {
             if (err) {
-                console.log("im here 3")
                 return reject(err);
             }
             const token = jwt.sign(user, 'your_jwt_secret');
+            user.token = token
             res.locals.data = { user, token }
             resolve()
         });
@@ -30,6 +30,25 @@ const authLocalLogin = (req, res, next) => {
     }).then(() => next())
         .catch((err) => new Error(err));
 }
+
+
+const authJwtStrategy = async (req, res, next) => {
+    try {
+        await passport.authenticate('local-jwt', { session: false })(req, res, next);
+        return next()
+    } catch (err) {
+        return new Error(err)
+    }
+}
+//  here i m not using the callback to make jwt
+// const authLocalLogin = async (req, res, next) => {
+//     try {
+//         await passport.authenticate('local-login', { session: false })(req, res, next);
+//         return next();
+//     } catch (error) { return new Error(error) }
+// }
+
+
 module.exports = {
-    authLocalLogin
+    authLocalLogin, authJwtStrategy
 }

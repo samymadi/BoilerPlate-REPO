@@ -1,11 +1,15 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy;
 const passportJWT = require("passport-jwt");
-const { verifyStrategyLoginCb } = require("../utils/strategyVerify.js");
+const { verifyStrategyLoginCb, verifyStrategyJwtCb } = require("../utils/strategyVerify.js");
 
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 
+const jwtLoginStrategy = new JWTStrategy({
+    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+    secretOrKey: 'your_jwt_secret'
+}, verifyStrategyJwtCb)
 
 
 // const cryptPassword = (user, password) => {
@@ -28,7 +32,7 @@ const loginLocalStrategy = new LocalStrategy(
     }, verifyStrategyLoginCb)
 
 module.exports = {
-    loginLocalStrategy
+    loginLocalStrategy, jwtLoginStrategy
 }
 
 

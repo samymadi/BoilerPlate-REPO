@@ -1,8 +1,8 @@
 const { validateBcryptDb } = require('../validation/validate.passport');
-const { findOneDb } = require("../services/db.services");
+const { findOneDb, findOneByIdDb } = require("../services/db.services");
 
 
-verifyStrategyLoginCb = async (email, password, cb) => {
+const verifyStrategyLoginCb = async (email, password, cb) => {
     try {
         const user = await findOneDb(email, password);
         return validateBcryptDb(user, password, cb);
@@ -11,4 +11,14 @@ verifyStrategyLoginCb = async (email, password, cb) => {
     }
 }
 
-module.exports = { verifyStrategyLoginCb }
+const verifyStrategyJwtCb = async (jwtPayload, cb) => {
+    try {
+        const user = await findOneByIdDb(jwtPayload.id)
+        if (user) return cb(null, user)
+        return cb(null, false, { message: 'something is incorrect in the token id' })
+    } catch (err) {
+        return cb(err)
+    }
+}
+
+module.exports = { verifyStrategyLoginCb, verifyStrategyJwtCb }
